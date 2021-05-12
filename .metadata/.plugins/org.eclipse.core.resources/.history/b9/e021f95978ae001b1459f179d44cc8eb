@@ -1,0 +1,141 @@
+package parte2;
+
+import java.text.ParseException;
+import java.util.Scanner;
+import parte2.entities.Anuncio;
+
+public class Principal {
+
+	public static void main(String[] args) throws ParseException {
+
+		Anuncio[] a = new Anuncio[6];
+		int i = 1;
+		Integer o;
+		int op;
+
+		// Instanciando anúncios (pré-cadastro)
+		/*
+		 * Anuncio a1 = new Anuncio(); a1.setNome("Anúncio emocionante");
+		 * a1.setCliente("Cliente do Primeiro Anúncio"); a1.setDataInicio("10/05/2021");
+		 * a1.setDataTermino("12/05/2021"); a1.setInvestDia(100.00);
+		 * 
+		 * lista.add(a1);
+		 */
+
+		do {
+
+			op = 0;
+
+			// Menu de opções
+			System.out.println("-------------- MENU --------------");
+			System.out.println("Digite o número da opção desejada:");
+			System.out.println("1 - Cadastrar anúncio");
+			System.out.println("2 - Obter relatório");
+			System.out.println("3 - Encerrar programa");
+			System.out.println("----------------------------------");
+
+			Scanner sc = new Scanner(System.in);
+			op = sc.nextInt();
+
+			if (op < 1 || op > 3) {
+				System.out.println("Opção inválida. Por favor, digite o número correspondente à operação desejada.");
+			}
+
+			switch (op) {
+			case 1:
+
+				do {
+
+					sc.nextLine();
+
+					a[i] = new Anuncio();
+					a[i].setId(i);
+
+					System.out.println("Digite as informações para cadastrar um novo anúncio.");
+					System.out.printf("Nome do anúncio: ");
+					a[i].setNome(sc.nextLine());
+					System.out.printf("Nome do cliente: ");
+					a[i].setCliente(sc.nextLine());
+					System.out.printf("Data de início (dd/MM/yyyy): ");
+					a[i].setDataInicio(sc.next());
+					System.out.printf("Data de término (dd/MM/yyyy): ");
+					a[i].setDataTermino(sc.next());
+					System.out.printf("Investimento diário: ");
+					a[i].setInvestDia(sc.nextDouble());
+
+					System.out.println("Anúncio cadastrado com sucesso!");
+					i++;
+
+					do {
+
+						System.out.println("--------------------------");
+						System.out.println("1 - Cadastrar novo anúncio");
+						System.out.println("2 - Retornar");
+						op = sc.nextInt();
+
+						if (op == 1) {
+							break;
+						}
+
+						if (op != 1 && op != 2) {
+							System.out.println(
+									"Opção inválida. Por favor, digite o número correspondente à operação desejada.");
+						}
+
+					} while (op == 1);
+
+				} while (op == 1);
+
+				break;
+
+			case 2:
+
+				if (a[1] == null) {
+					
+					System.out.println("Não há anúncios cadastrados.");
+					
+				} else {
+					
+					System.out.println("Anúncios cadastrados:");
+
+					for (int p = 1; p <= (i - 1); p++) {
+						System.out.println("Id: " + a[p].getId() + " | Nome: " + a[p].getNome());
+					}
+
+					System.out.printf("Digite o id do anúncio para obter o relatório: ");
+					o = sc.nextInt();
+
+					if (o != null) {
+
+						System.out.println("--------------------------------------- ");
+						System.out.println("Consultando anúncio " + a[o].getNome());
+						System.out.println("Nome do anúncio: " + a[o].getNome());
+						System.out.println("Nome do cliente: " + a[o].getCliente());
+						System.out.println("Data de início (dd/MM/yyyy): " + a[o].getDataInicio());
+						System.out.println("Data de término (dd/MM/yyyy): " + a[o].getDataTermino());
+						System.out.println("Investimento diário: " + a[o].getInvestDia());
+
+					} else {
+
+						System.out.printf("Por favor, digite um id válido: ");
+
+					}
+
+				}
+
+				break;
+
+			case 3:
+
+				sc.close();
+				break;
+
+			}
+
+		} while (op != 3);
+
+		System.out.println("Encerrado.");
+
+	}
+
+}

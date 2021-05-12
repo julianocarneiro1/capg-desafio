@@ -1,0 +1,107 @@
+package parte2.entities;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Anuncio {
+	
+	private int id;
+	private String nome;
+	private String cliente;
+	private Date dataInicio;
+	private Date dataTermino;
+	private double investDia;
+
+	public Anuncio() {
+	}
+
+	public Anuncio(String nome, String cliente, Date dataInicio, Date dataTermino, double investDia, int id) {
+		this.id = id;
+		this.nome = nome;
+		this.cliente = cliente;
+		this.dataInicio = dataInicio;
+		this.dataTermino = dataTermino;
+		this.investDia = investDia;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(String dataInicio) throws ParseException {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+		Date d = formato.parse(dataInicio);
+		this.dataInicio = d;
+	}
+
+	public Date getDataTermino() {
+		return dataTermino;
+	}
+
+	public void setDataTermino(String dataTermino) throws ParseException {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+		Date d = formato.parse(dataTermino);
+		this.dataTermino = d;
+	}
+
+	public double getInvestDia() {
+		return investDia;
+	}
+
+	public void setInvestDia(double investDia) {
+		this.investDia = investDia;
+	}
+
+	public String valorTotal(double investDia, Date d1, Date d2) {
+		
+		DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+        df.setLenient(false);
+        long dt = (d2.getTime() - d1.getTime()) + 3600000; // 1 hora para compensar horário de verão
+        return ((dt / 86400000L) * investDia) + " reais";
+	}
+	
+	/*
+
+	public Int maxVis() {
+
+		return vis;
+	}
+
+	public Int maxCliq() {
+
+		return cliq;
+	}
+
+	public Int maxComp() {
+
+		return comp;
+	}
+	*/
+
+}
